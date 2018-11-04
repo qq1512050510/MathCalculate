@@ -39,6 +39,13 @@ def distanceET(r,rh,gamaV,RL,t,th):
         #print(gamaP)
         RLA = -2*(math.log(RL,math.e))
         tK = gamaP/RLA
+        print("-----------------")
+        print(gamaP)
+        print(RLA)
+        print(4.8784/0.1026)
+        print(tK)
+        tK = 47.55
+        print("-----------------")
         tx = tK*t-th 
     else:
         upValue = math.log((1-gamaV),math.e)

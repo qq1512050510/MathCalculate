@@ -13,11 +13,21 @@ def distanceEval(t,th,m,n,r,rh,RL,gama):
     if r==0:
         print((math.log(1-gama)/math.log(RL))*math.pow(t, m))
         tx = (math.log(1-gama)/math.log(RL))*math.pow(t, m) - math.pow(th,m)
-        print()
+        print('-------------------')
+        print(math.log(1-gama))
+        print(math.log(RL))
+        print((math.log(1-gama)/math.log(RL)))
+        print(1.2040/0.0513)
+        print(math.pow(t, m))
+        print(math.pow(th,m))
+        print((23.47)*(63095.7) - math.pow(th,m))
+        print('-------------------')
     else:
         print((math.pow(t,m)*chi2.isf(1-gama,2*r+2*rh+2))/(-2*math.log(RL)))
-        tx = (math.pow(t,m)*chi2.isf(1-gama,2*r+2*rh+2))/(-2*math.log(RL))-math.pow(th,m)
-        print()
+        tx = (math.pow(t,m)*chi2.isf(1-gama,2*r+2*rh+2))/(-2*math.log(RL)) - math.pow(th,m)
+        print
+        
+        print('tx',tx)
     return tx;
 
 def pointEval(t,th,m,n,r,rh,Rp,gama):

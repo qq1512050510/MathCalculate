@@ -1,6 +1,8 @@
 # encoding: utf-8
 import math
 from decimal import Decimal
+from scipy.stats import f
+from scipy.stats import chi2
 
 
 print('1、试验方案设计')
@@ -25,11 +27,15 @@ def getX2Val(r,n):
     columnNo = aList.index(a)
     rowNo = nList.index(n)
     return lists[rowNo][columnNo];
+
+def getChi2Val(r,n):
+    return(chi2.isf(1-r,n));
+    
 #计算可靠度下限算法  计算试验事件
 def distanceET(r,rh,gamaV,RL,t,th):
     if r!=0:
         n = 2*r+2*rh+2;
-        gamaP = getX2Val(gamaV, n)
+        gamaP = getChi2Val(gamaV, n)
         #print(gamaP)
         RLA = -2*(math.log(RL,math.e))
         tK = gamaP/RLA
@@ -91,3 +97,6 @@ print("(3)优化算法测试")
 print("可靠性下限算法")
 print(allCount(txe0,200000,500))
 
+print(f.isf(0.1,4,4))
+#卡方分布已知n和a，求分位点
+print(chi2.isf(0.3,4))    

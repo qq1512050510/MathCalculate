@@ -70,13 +70,15 @@ def allCount(tx,c1,c2):
     print(te)
     c = c1*nx + c2*te
     return c;
-
+n=3;
 print("(1)定样本量")
 print("可靠度下限算法测试")
 txe0 = distanceET(0,0,0.7,0.95,10000,100000);
 print(txe0)
+print(txe0/n)
 txe1 = distanceET(1,0,0.7,0.95,10000,100000)
 print(txe1)
+print(txe1/n)
 print("可靠度点估计算法测试")
 txp0 = distancePT(0,0,0.96,10000,100000)
 print(txp0)

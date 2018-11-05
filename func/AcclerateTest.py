@@ -6,7 +6,7 @@ Created on Nov 4, 2018
 import math
 #from decimal import Decimal
 from scipy.stats import chi2
-
+import scipy.constants as C
 
 print('1、试验方案设计')
 print('1.1.1.2(4)')
@@ -53,18 +53,47 @@ def allCount(tx,c1,c2):
     print(te)
     c = c1*nx + c2*te
     return c;
+def calAF(Ea,T0,T):
+    Ea = Ea*1.60*1e-19
+    T0 = T0 + 273.15
+    T = T + 273.15
+    AF = math.exp((1/T0-1/T)*Ea/C.k)
+    return AF;
+def Caln(te,tx,AF):
+    n = tx/(te*AF)
+    return math.ceil(n);
+print("(4)数值例")
+
+Ea = 1
+T0 = 25
+T = 49.7
+n = 3
+AF = calAF(Ea,T0,T);
+print(AF)
+
 
 print("(1)定样本量")
 print("可靠度下限算法测试")
 txe0 = distanceET(0,0,0.7,0.95,10000,100000);
 print(txe0)
+txxe0 = txe0/(n*AF)
+print(txxe0)
+
 txe1 = distanceET(1,0,0.7,0.95,10000,100000)
 print(txe1)
+
+txxe1 = txe1/(n*AF)
+print(txxe1)
+
 print("可靠度点估计算法测试")
 txp0 = distancePT(0,0,0.96,10000,100000)
 print(txp0)
+te0 = txp0/(n*AF)
+print(te0)
 txp1 = distancePT(1,0,0.96,10000,100000)
 print(txp1)
+te1 = txp1/(n*AF)
+print(te1)
 print("(2)定试验时间")
 #任务要求时间
 tr = 10000;
@@ -75,8 +104,13 @@ print("可靠度点估计算法测试")
 print(distanceV(txp0,tr))
 print(distanceV(txp1,tr))
 
-print("(3)优化算法测试")
+print("(2)定试验事件")
+tE =  1000
+r0 = 0
+r1 = 1
+print(Caln(tE,txe0,AF))
+print(Caln(tE,txe1,AF))
 
-print("可靠性下限算法")
-print(allCount(txe0,200000,500))
+print(Caln(tE,txp0,AF))
+print(Caln(tE,txp1,AF))
  

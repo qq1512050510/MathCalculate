@@ -1,7 +1,7 @@
 '''
 Created on Nov 4, 2018
 
-@author: jyp
+@author: yp
 '''
 import math
 #from decimal import Decimal
@@ -14,7 +14,7 @@ print('1.1.1.2(4)')
 def getChi2Val(r,n):
     return(chi2.isf(1-r,n));
     
-#计算可靠度下限算法  计算试验事件
+#计算可靠度下限算法  计算试验时间
 def distanceET(r,rh,gamaV,RL,t,th):
     if r!=0:
         n = 2*r+2*rh+2;

@@ -32,7 +32,7 @@ def distanceETCalNum(RL,gama,K,t,s):
 
 #根据强度系数K，求样本量
 def calSamNum(gama,omegal,K):
-    for n in range(2,50):
+    for n in range(2,10000000):
         x = nct.ppf(gama,n-1,math.sqrt(n)*omegal)
         diffValue = abs(math.sqrt(n)*K - x)
         if diffValue < 0.5: #n的数量是由于四舍五入导致的误差，所以把误差精度控制在0.5

@@ -151,7 +151,7 @@ dulSideRLnUCalMean(0.95,0.7,10,500,10)
 dulSideRLnLCalMean(0.95,0.7,10,200,10)
 dulSideRLkLCalMean(0.95,0.7,3,200,10)
 dulSideRLkUCalMean(0.95,0.7,3,500,10)
-dulSidecalRPNormF(200,600,0.98,10)
+dulSidecalRPNormF(300,500,0.98,10)
 #完整版
 
 

@@ -3,8 +3,8 @@ Created on 2018年11月8日
 
 @author: Yang
 '''
-import math
-import scipy.stats as st
+#import math
+from math import sqrt
 from scipy.stats import norm
 from scipy.stats import nct
 #from sympy import * #符号库，计算积分
@@ -18,20 +18,20 @@ def CalOmegal(RL):
 #根据样本量n,求K
 def sigSideCalK(RL,gama,n):
     omegal = CalOmegal(RL)
-    K = float('%.6f' % (nct.ppf(gama,n-1,omegal*math.sqrt(n))/math.sqrt(n)))
+    K = float('%.6f' % (nct.ppf(gama,n-1,omegal*sqrt(n))/sqrt(n)))
     # print('K=',K)
     return K
 
 #根据强度系数K，求n
 def calSamNum(RL,gama,K):
     omegal = CalOmegal(RL)
-    Kpie = float('%.6f' % (nct.ppf(gama,999999,omegal*math.sqrt(1000000))/math.sqrt(1000000)))
+    Kpie = float('%.6f' % (nct.ppf(gama,999999,omegal* sqrt(1000000))/ sqrt(1000000)))
     if (K < Kpie):
         print('剩余强度系数取值过小，无法计算')
         return 
     for n in range(2,7):#100000
-        x = nct.ppf(gama,n-1,math.sqrt(n)*omegal)
-        diffValue = abs(math.sqrt(n)*K - x)
+        x = nct.ppf(gama,n-1,sqrt(n)*omegal)
+        diffValue = abs(sqrt(n)*K - x)
         if diffValue < 0.5: #n的数量是由于四舍五入导致的误差，所以把误差精度控制在0.5
             print('样本量n=',n)
             print(diffValue)
@@ -120,7 +120,7 @@ def dulSideRLkUCalMean(RL,gama,K,U,s):
 
 #计算符号化正态分布的分布函数，与fsolve一起求解
 def calF(x,L,U,R,s):
-    return st.norm.cdf((U-x)/s)+st.norm.cdf((x-L)/s)-1-R
+    return norm.cdf((U-x)/s)+ norm.cdf((x-L)/s)-1-R
 #双侧限可考度点估计
 def dulSidecalRPNormF(L,U,R,s):
     for i in range(L,U):

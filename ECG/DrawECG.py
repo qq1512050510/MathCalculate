@@ -16,7 +16,8 @@ plt.title("ECG")
 
 
 yline = input();
-ysplit = re.split(" ", yline);
+ysplit = re.split(" ", yline)
+#map进行类型转换
 y = list(map(eval,ysplit))
 x = np.arange(0, len(y))
 print(len(x))

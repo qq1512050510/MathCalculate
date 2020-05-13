@@ -12,21 +12,24 @@ import matplotlib
 # fname 为 你下载的字体库路径，注意 SimHei.ttf 字体的路径
 
 # fname 为 你下载的字体库路径，注意 SimHei.ttf 字体的路径
-plt.title("ECG")
 
+plt.rcParams['font.sans-serif'] = ['KaiTi']
+plt.rcParams['font.serif'] = ['KaiTi']
+plt.rcParams['axes.unicode_minus'] = False
+# myfont = fm.FontProperties(fname=r'D:\Fonts\simkai.ttf')
 
-yline = input();
-ysplit = re.split(" ", yline)
-# map进行类型转换
-y = list(map(eval, ysplit))
-x = np.arange(0, len(y))
+#plt.title("ECG")
+x = [0, 10, 20, 29.9, 30, 40, 50, 60]
+y = [0, 0, 0, 0, 1, 1, 1, 1]
+# x = np.arange(0, 70, 10)
 print(len(x))
 print(y)
 print(x)
-plt.title("ECG")
+#plt.title("原始ECG信号的实际分类标签", y=-1)
 
 # fontproperties 设置中文显示，fontsize 设置字体大小
-plt.xlabel("x")
-plt.ylabel("y")
+plt.xlabel("时间/秒")
+plt.ylabel("实际标签")
 plt.plot(x, y)
+plt.yticks((0, 0.5, 1))
 plt.show()

@@ -1,0 +1,85 @@
+import matplotlib.pyplot as plt  # plt 用于显示图片
+import matplotlib.image as mpimg  # mpimg 用于读取图片
+import numpy as np
+
+
+def func(img, label):
+    # print('label[0]:', label[:,:,0])
+    if (1):
+        img = img / 255.
+        label = label[:, :, :, 0] if (len(label.shape) == 4) else label[:, :, 0]
+        new_label = np.zeros(label.shape + (3,))
+        for i in range(3):
+            new_label[label == i, i] = 1
+            print('\n i = \n ', i, '\n label = \n', label, '\n label==i: \n', label == i)
+            print('\n\n after-img:\n', img, '\n\n after-label:\n', new_label, '\n')
+        label = new_label
+
+    elif (np.max(img) > 1):
+        img = img / 255.
+        label = label / 255.
+        label[label > 0.5] = 1
+        label[label <= 0.5] = 0
+    return (img, label)
+
+
+lena = mpimg.imread('attention.png')  # 读取和代码处于同一目录下的 lena.png
+ecgwave = mpimg.imread('ecgwave.png')
+
+# 此时 lena 就已经是一个 np.array 了，可以对它进行任意处理
+lena.shape  # (512, 512, 3)
+ecgwave.shape
+
+# plt.imshow(lena) # 显示图片
+
+print(lena)
+print(ecgwave.shape)
+point = lena[:, :][100]
+print(point.shape)
+print(point)
+
+plt.imshow(ecgwave, cmap="hot")
+plt.axis('on')  # 不显示坐标轴
+plt.show()
+
+plt.imshow(lena)
+plt.axis('on')  # 不显示坐标轴
+plt.show()
+
+label = np.array([[[1, 2, 0],
+                   [0, 1, 2],
+                   [2, 1, 0]],
+
+                  [[1, 2, 0],
+                   [2, 1, 2],
+                   [2, 1, 0]],
+
+                  [[0, 2, 0],
+                   [0, 1, 2],
+                   [2, 1, 0]]])
+
+img = np.array([[129, 129, 30],
+                [30, 30, 99],
+                [90, 123, 49]])
+img2 = np.array([[[0.9137255, 0.9137255, 0.9137255, 1.],
+                  [0.23921569, 0.23921569, 0.23921569, 1.],
+                  [0.49019608, 0.49019608, 0.49019608, 1.]],
+                 [[0.9137255, 0.9137255, 0.9137255, 1.],
+                  [0.23921569, 0.23921569, 0.23921569, 1.],
+                  [0.49019608, 0.49019608, 0.49019608, 1.]],
+                 [[0.9137255, 0.9137255, 0.9137255, 1.],
+                  [0.23921569, 0.23921569, 0.23921569, 1.],
+                  [0.49019608, 0.49019608, 0.49019608, 1.]],
+                 [[0.9137255, 0.9137255, 0.9137255, 1.],
+                  [0.23921569, 0.23921569, 0.23921569, 1.],
+                  [0.49019608, 0.49019608, 0.49019608, 1.]]
+                 ])
+
+# print(len(label.shape))
+print('\n\n before-img:\n', img, '\n\n before-label:\n', label, '\n')
+func(img, label)
+print(img2.shape)
+print(img2)
+plt.imshow(img2)
+plt.axis('on')  # 不显示坐标轴
+plt.show()
